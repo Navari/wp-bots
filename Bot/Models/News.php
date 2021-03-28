@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Bot\Models;
+namespace Navari\Bot\Models;
 
 
 class News extends AbstractModel
@@ -11,11 +11,19 @@ class News extends AbstractModel
     protected string $image;
     protected string $originLink;
     protected string $description = "";
+    protected string $rawBody = "";
     protected string $tags = "";
     protected string $gallery = "";
     protected string $category = "";
 
 
+    /**
+     * @return string
+     */
+    public function getRawBody(): string
+    {
+        return $this->rawBody;
+    }
     /**
      * @return string
      */
@@ -109,6 +117,9 @@ class News extends AbstractModel
                 break;
             case 'category':
                 $this->category = $value;
+                break;
+            case 'raw_body':
+                $this->rawBody = $value;
                 break;
         }
     }

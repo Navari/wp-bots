@@ -18,7 +18,7 @@ class CreateCrawlSitesTable extends Migration
             $table->string('title')->index();
             $table->string('module')->index();
             $table->json('parameters')->nullable();
-            $table->tinyInteger('is_active')->index()->default(0);
+            $table->tinyInteger('is_active')->index()->default(1);
             $table->timestamps();
         });
     }

@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Bot\Modules\Haberler\Haberler;
 use App\Models\CrawlSite;
 use Illuminate\Console\Command;
 use RecursiveDirectoryIterator;
@@ -38,18 +37,19 @@ class ModuleRegister extends Command
      * Execute the console command.
      *
      * @return void
+     * @throws \JsonException
      */
     public function handle(): void
     {
 //        $haberler = new Haberler();
 //        $haberler->run();
 //        print_r(app_path('modules') . '\*');
-        $modules = $this->getDirContents(app_path('Bot/Modules'));
+        $modules = $this->getDirContents(base_path('Bot/Modules'));
         foreach($modules as $module){
             $call = $this->getClassFullNameFromFile($module->getPathName());
             $class = new $call();
             $name = $class->name;
-            $parameters = json_encode($class->parameters);
+            $parameters = json_encode($class->parameters, JSON_THROW_ON_ERROR);
             $this->info($name . ' modülü bulundu sisteme kaydediliyor');
             CrawlSite::updateOrCreate([
                 'module' => $call,

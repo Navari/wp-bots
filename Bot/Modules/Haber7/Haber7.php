@@ -1,21 +1,22 @@
 <?php
 
 
-namespace App\Bot\Modules\Haberler;
+namespace Navari\Bot\Modules\Haber7;
 
 
-use App\Bot\Http\Request;
-use App\Bot\Interfaces\BotInterface;
-use App\Bot\Models\News;
+use Navari\Bot\Http\Request;
+use Navari\Bot\Interfaces\BotInterface;
+use Navari\Bot\Models\News;
+use Navari\Bot\Parser\SimpleDom;
 use GuzzleHttp\Client;
 
-class Haberler implements BotInterface
+class Haber7 implements BotInterface
 {
 
-    public string $baseUrl = "https://www.haberler.com/";
-    public string $name = "Haberler.com botu";
+    public string $baseUrl = "https://www.haber7.com/";
+    public string $name = "haber7.com botu";
     public array $parameters = [];
-    public string $rss = "https://rss.haberler.com/rss.asp?limit=100";
+    public string $rss = "http://sondakika.haber7.com/sondakika.rss";
     public array $categories = [];
     public array $news = [];
     public array $errors = [];
@@ -32,8 +33,8 @@ class Haberler implements BotInterface
         foreach($rss->channel->item as $item){
             $news = [
                 'title' => (string)$item->title,
-                'summary' => (string)$item->description,
-                'image' => (string)$item->children('media', true)->attributes()->url,
+                'summary' => (string)strip_tags($item->description),
+                'image' => '',
                 'link' => (string)$item->link,
                 'description' => '',
                 'tags' => '',
@@ -42,11 +43,15 @@ class Haberler implements BotInterface
             ];
             $response = Request::get($news['link']);
             preg_match('@<script type="application/ld\\+json">(.*?)</script>@si', $response->raw_body, $json);
+            $dom = new SimpleDom($response->raw_body);
+            $raw_body = $dom->getElementByClass('div', 'news-content');
             if(isset($json[1])){
                 $decoded = json_decode($json[1]);
+                $news['image'] = $decoded->image->url;
                 $news['description'] = $decoded->articleBody;
-                $news['tags'] = implode(',', $decoded->keywords);
+                $news['tags'] = is_object($decoded->keywords) ? implode(',', $decoded->keywords) : $decoded->keywords;
                 $news['category'] = $decoded->articleSection;
+                $news['raw_body'] = $raw_body;
                 $this->news[] = News::create($news);
             }else{
                 $this->errors[] = $news['link'];

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Bot\Http;
+namespace Navari\Bot\Http;
 
 
 use Psr\Http\Client\ClientExceptionInterface;

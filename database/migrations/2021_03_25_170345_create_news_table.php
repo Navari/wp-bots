@@ -19,6 +19,7 @@ class CreateNewsTable extends Migration
             $table->string('title', 1000)->index();
             $table->text('summary')->nullable();
             $table->longText('description');
+            $table->longText('raw_body');
             $table->text('tags')->nullable();
             $table->json('gallery')->nullable();
             $table->string('origin_url',1000)->nullable();

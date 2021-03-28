@@ -13,6 +13,7 @@ class News extends Model
         'title',
         'summary',
         'description',
+        'raw_body',
         'tags',
         'gallery',
         'origin_url',

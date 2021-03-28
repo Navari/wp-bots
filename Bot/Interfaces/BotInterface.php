@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Bot\Interfaces;
+namespace Navari\Bot\Interfaces;
 
 
-use App\Bot\Models\News;
+use Navari\Bot\Models\News;
 
 interface BotInterface
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Bot\Traits;
+namespace Navari\Bot\Traits;
 
 
 use phpDocumentor\Reflection\DocBlock\Tags\See;

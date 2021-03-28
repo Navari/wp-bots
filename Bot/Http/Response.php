@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Bot\Http;
+namespace Navari\Bot\Http;
 
 
 use Psr\Http\Message\ResponseInterface;
@@ -26,7 +26,7 @@ class Response
         $this->code     = $response->getStatusCode();
         $this->headers  = $response->getHeaders();
         $raw_body       = $response->getBody()->getContents();
-        $this->raw_body = $raw_body;
+        $this->raw_body = str_replace(["\t", "\n", "  "], "",trim($raw_body));
         $this->body     = $raw_body;
 
         if (function_exists('json_decode') && is_object(json_decode($raw_body))) {

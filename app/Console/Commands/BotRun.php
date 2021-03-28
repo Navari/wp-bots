@@ -53,6 +53,7 @@ class BotRun extends Command
                         'title' => $item->getTitle(),
                         'summary' => $item->getSummary(),
                         'description' => $item->getDescription(),
+                        'raw_body' => $item->getRawBody(),
                         'tags' => $item->getTags(),
                         'category_id' => $insertCategory->id,
                         'crawl_site_id' => $site->id

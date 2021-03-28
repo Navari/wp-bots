@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Bot\Models;
+namespace Navari\Bot\Models;
 
 
-use App\Bot\Traits\ArrayLikeTrait;
-use App\Bot\Traits\InitializerTrait;
+use Navari\Bot\Traits\ArrayLikeTrait;
+use Navari\Bot\Traits\InitializerTrait;
 use JetBrains\PhpStorm\Pure;
 
 class AbstractModel implements \ArrayAccess

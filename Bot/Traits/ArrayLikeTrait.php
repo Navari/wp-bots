@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Bot\Traits;
+namespace Navari\Bot\Traits;
 
 
 use JetBrains\PhpStorm\Pure;
