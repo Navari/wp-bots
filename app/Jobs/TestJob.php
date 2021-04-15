@@ -32,6 +32,6 @@ class TestJob implements ShouldQueue
      */
     public function handle()
     {
-        var_dump($this->a);
+        \Log::info($this->a . " " . $this->b);
     }
 }
