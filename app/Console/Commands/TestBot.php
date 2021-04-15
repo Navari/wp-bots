@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Redis;
 use Navari\Bot\Modules\Cumhuriyet\Cumhuriyet;
 use Navari\Bot\Modules\Ensonhaber\Ensonhaber;
 use Navari\Bot\Modules\Gazeteduvar\Gazeteduvar;
@@ -43,9 +44,10 @@ class TestBot extends Command
      */
     public function handle()
     {
-        $cumhuriyet = new Hurriyet();
-        $cumhuriyet->run();
-        print_r($cumhuriyet->get());
-//        print_r($cumhuriyet->getErrors());
+//        $cumhuriyet = new Hurriyet();
+//        $cumhuriyet->run();
+//        print_r($cumhuriyet->get());
+////        print_r($cumhuriyet->getErrors());
+        print_r(Redis::connection()->client()->info());
     }
 }

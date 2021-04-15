@@ -15,7 +15,8 @@
         "ext-simplexml": "*",
         "ext-libxml": "*",
         "ext-dom": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "laravel/horizon": "v5.7.5"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.9",

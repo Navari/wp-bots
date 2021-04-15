@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    print_r(\App\Models\News::search('Süveyş kanalı')->get());
 });
 
 Auth::routes();

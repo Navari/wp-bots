@@ -41,14 +41,14 @@ class Hurriyet implements BotInterface
                 'gallery' => '',
                 'category' => (string)$item->category
             ];
-            print_r($news);
-            die();
             $response = Request::get($news['link']);
             preg_match('@<script type="application/ld\\+json">(.*?)</script>@si', $response->raw_body, $json);
             $dom = new SimpleDom($response->raw_body);
             $raw_body = $dom->getElementByClass('div', 'hbptContent haber_metni');
             if(isset($json[1])){
                 $decoded = json_decode($json[1]);
+                print_r($decoded);
+                die();
                 $news['description'] = $decoded->articleBody;
                 $news['tags'] = implode(',', $decoded->keywords);
                 $news['category'] = $decoded->articleSection;
